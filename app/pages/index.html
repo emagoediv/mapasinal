@@ -68,6 +68,7 @@
 
 
     <!-- Models -->
+    <!-- Modal Login -->
     <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -76,7 +77,19 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Show a second modal and hide this one with the button below.
+                <form id="formLogin">
+                    <div class="mb-3">
+                      <label for="nameUser" class="form-label">nome de usuário</label>
+                      <input type="text" class="form-control" id="nameUser" >
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Senha</label>
+                      <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="mb-3 form-check">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Logar</button>
+                  </form>
             </div>
             <div class="modal-footer">
               <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
