@@ -8,8 +8,8 @@ function requestCircles(operadora) {
         body: dados
     }).then(response => response.json()).then(
         (returneds) => {
-        for (let returne in returneds) {
-            generateCircle(returne.latitude, returne.longitude, returne.raio, returne.color, returne.cor)
+        for (let i in returneds) {
+            generateCircle(returneds[i].latitude, returneds[i].longitude, returneds[i].raio, returneds[i].color, returneds[i].cor)
         }
         for (let returne of Object.entries(returneds)) {
             generateCircle(returne.latitude, returne.longitude, returne.raio, returne.color, returne.cor)
