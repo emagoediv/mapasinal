@@ -1,29 +1,26 @@
-let textPosition = document.querySelector('#txtPos')
-var map
-function success(position) {
-	textPosition.innerHTML = `
-	Latidude: ${position.coords.latitude}<br>
-	Longitude: ${position.coords.longitude}<br>
-	`
-	//setMap(position.coords.latitude, position.coords.longitude)
-	if(map === undefined) {
-        map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
-    } else {
-        map.remove()
-        map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
-    }
+var map;
+
+function success(pos){
+    alterLocation(pos.coords.latitude, pos.coords.longitude)
+    console.log(pos.coords.latitude, pos.coords.longitude)
+
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker([51.5, -0.09]).addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    L.marker([pos.coords.latitude, pos.coords.longitude]).addTo(map)
+        .bindPopup('Eu estou aqui!')
         .openPopup();
 }
 
-function error(error) {
-	alert("Aceite o uso de locaçização para melhor usabilidade")
+function error(err){
+    console.log(err);
 }
 
-var positionUser = navigator.geolocation.watchPosition(success, error)
+var watchID = navigator.geolocation.watchPosition(success, error, {
+    enableHighAccuracy: true,
+    timeout: 5000
+});
+
+

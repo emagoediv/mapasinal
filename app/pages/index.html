@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
     <link rel="stylesheet" href="../css/estilo.css">
-    <title>Mapa sinal</title>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <title>Leaflet</title>
 </head>
-<body class="flex bg-slate-300 justify-center w-screen h-screen">
-    <div class="flex backdrop-brightness-75 self-center justify-center w-11/12 h-5/6 rounded-2xl">
-        <form class="flex flex-col self-center">
-            <div class="m-1 bg-black rounded-full w-64 h-64"></div>
-            <div class="flex flex-col m-2 w-11/12 h-  self-center border-2 border-solid border-black p-4 rounded-lg">
-                <div class="w-10/12 h-4/5 flex flex-col self-center">
-                    <label for="">Usuário</label>
-                <input type="text" class="" name="" id="">
-                </div>
-                <div class="w-10/12 h-4/5 flex flex-col self-center">
-                    <label for="">Senha</label>
-                    <input type="password" class="" name="" id="">
-                </div>
-            </div>
-        </form>
+<body class="w-screen h-screen">
+    <div class="w-1/12 bg-none float-right mr-24">
+        <ul class="flex z-50 absolute justify-between decoration-gray-800 list-none  hover:cursor-pointer ease-in-out ">
+            <li class="m-1 p-1 rounded-lg bg-slate-500 decoration-gray-800  hover:decoration-slate-900"><a href="login.html">Logar</a></li>
+            <li class="m-1 p-1 rounded-lg bg-slate-500 decoration-gray-800  hover:decoration-slate-90"><a href="cadastrar.html">Cadastrar</a></li>
+        </ul>
     </div>
+    <div id="mapid" class="w-screen h-screen z-0"></div>
+    <script src="../js/generateCircles.js"></script>
+    <script src="../js/setMap.js"></script>
+    <script src="../js/requestLocation.js"></script>
+    <script src="../js/requestCircles.js"></script>
 </body>
 </html>
