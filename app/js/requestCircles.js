@@ -1,5 +1,6 @@
-function requestCircles() {
+function requestCircles(operadora) {
     dados = new FormData
+    dados.append('operadora', operadora)
     dados.append('request', true)
     dados.append('action', 'lerCircle')
     fetch('http://localhost/mapasinal/server/webserver.php', {
@@ -7,10 +8,13 @@ function requestCircles() {
         body: dados
     }).then(response => response.json()).then(
         (returneds) => {
-        for (returne in returneds) {
+        for (let returne of Object.entries(returneds)) {
             generateCircle(returne.latitude, returne.longitude, returne.raio, returne.color, returne.cor)
-        }
-    })
-}
+         }
+    }
+)}
 
-requestCircles()
+let select = document.querySelector('#operadoras')
+select.addEventListener('change', () => {
+    requestCircles(select.value)
+})
