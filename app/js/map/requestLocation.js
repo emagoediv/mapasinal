@@ -25,7 +25,7 @@ function success(pos){
 }
 
 function error(err){
-    console.log(err);
+    alert("Para que o sistema funcione, necessitamos que aceite o uso de localização do dispositivo")
 }
 
 function generateMap () {
