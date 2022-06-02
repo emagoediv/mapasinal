@@ -1,0 +1,1 @@
+const WEBSERVER =  "http://localhost/mapasinal2/server/webserver.php"

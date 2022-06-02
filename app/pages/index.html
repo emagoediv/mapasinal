@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-    <title>Leaflet</title>
+    <title>mapasinal</title>
 </head>
 
 <style>
@@ -31,7 +31,7 @@
     }
     .buttonsModal {
         float: right;
-        margin-right: 6rem;
+        margin-right: 50%;
         background-color: transparent;
         width: 8.333333%;
     }
@@ -39,22 +39,24 @@
         display: flex;
         z-index: 50;
         position: absolute;
-        background-color: rgb(100 116 139);
         color:black;
         list-style-type: none;
+        border: 1px solid black;
+        border-radius: 1rem;
     }
     .itemModel {
-        margin: 1rem;
-        padding: 1rem;
+        margin: 0.5rem;
         border-radius: 0.5rem;
     }
 </style>
 <body class="w-screen h-screen">
     <div class="buttonsModal">
         <ul class="nav">
-            <li class="itemModel"><button type="button" data-bs-target="#modalLogin" data-bs-toggle="modal">Logar</button></li>
+            <li id="btnModalLogin"  class="itemModel"><button type="button" class="btn btn-primary" data-bs-target="#modalLogin"  data-bs-toggle="modal">Logar</button></li>
+            <li id="btnModalCircle" style="display: none;" class="itemModel"><button type="button" class="btn btn-primary"  data-bs-target="#modalCadCircle" data-bs-toggle="modal">Cadastrar Área</button></li>
+            <li style="display: none;" id="btnSair" class="itemModel"><button type="button" id="btnSairClick" class="btn btn-danger">sair</button></li>
             <li class="itemModel">
-                <select id="operadoras" name="operadoras">
+                <select id="operadora" name="operadora" class="form-select form-select-sm">
                     <option selected value="">selectione uma operadora</option>
                     <option value="vivo">vivo</option>
                     <option value="claro">CLARO</option>
@@ -73,122 +75,114 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="exampleModalToggleLabel">Logar</h5>
+              <button type="button" class="btn-close" id="btnCloseModalLogin" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="formLogin">
                     <div class="mb-3">
                       <label for="nameUser" class="form-label">nome de usuário</label>
-                      <input type="text" class="form-control" id="nameUser" >
+                      <input type="text" class="form-control" name="name" id="nameUser" >
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Senha</label>
-                      <input type="password" class="form-control" id="password">
+                      <input type="password" class="form-control" name="password" id="password">
                     </div>
                     <div class="mb-3 form-check">
                     </div>
                     <button type="submit" class="btn btn-primary">Logar</button>
+                    <button type="button" class="btn btn-warning" data-bs-target="#modalCadastro" data-bs-toggle="modal" >Cadastrar</button>
                   </form>
             </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
-            </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Hide this modal and show the first with the button below.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#modalLogin" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="btn btn-primary" data-bs-toggle="modal" href="#modalLogin" role="button">Open first modal</a>
+
 
       <!-- Modal de cadastrar usuario -->
-    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal fade" id="modalCadastro" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="exampleModalToggleLabel2">Cadastrar</h5>
+              <button type="button" id="btnCloseModalCad" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Show a second modal and hide this one with the button below.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+              <form id="formCad">
+                <div class="mb-3">
+                  <label for="nameUser"  class="form-label">nome de usuário</label>
+                  <input type="text" class="form-control" name="name" id="nameUser" >
+                </div>
+                <div class="mb-3">
+                  <label for="nameUser" name="email" class="form-label">email</label>
+                  <input type="email" class="form-control" name="email" id="nameUser" >
+                </div>
+                <div class="mb-3">
+                  <label for="password" name="password" class="form-label">Senha</label>
+                  <input type="password" class="form-control" name="password" id="password">
+                </div>
+                <div class="mb-3 form-check">
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Hide this modal and show the first with the button below.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#modalLogin" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="btn btn-primary" data-bs-toggle="modal" href="#modalLogin" role="button">Open first modal</a>
+      
 
       <!-- Modal de cadastrar área -->
-    <div class="modal fade" id="modalLogin" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal fade" id="modalCadCircle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+              <h5 class="modal-title" id="exampleModalToggleLabel">Cadastrar Área/h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Show a second modal and hide this one with the button below.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+              <form id="formLogin">
+                <div class="mb-3">
+                  <label for="nameUser" class="form-label">Latitude</label>
+                  <input type="text" class="form-control" placeholder="-47.1246532" id="nameUser" >
+                </div>
+                <div class="mb-3">
+                  <label for="nameUser" class="form-label">Longitude</label>
+                  <input type="text" class="form-control" placeholder="-47.1246532" id="nameUser" >
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">raio em km</label>
+                  <input type="text" class="form-control" placeholder="1" id="password">
+                </div>
+                <div class="mb-3 form-check">
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar Área</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Hide this modal and show the first with the button below.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" data-bs-target="#modalLogin" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="btn btn-primary" data-bs-toggle="modal" href="#modalLogin" role="button">Open first modal</a>
+      
 
+   
+      
 
-    <script src="../js/generateCircles.js"></script>
-    <script src="../js/setMap.js"></script>
-    <script src="../js/requestLocation.js"></script>
-    <script src="../js/requestCircles.js"></script>
+      <!-- Configurações -->
+    <script src="../js/configs/webserver.js"></script>
+    <script src="../js/configs/cookieLogin.js"></script>
+
+    <!-- Mapa -->
+    <script src="../js/map/setMap.js"></script>
+    <script src="../js/map/requestLocation.js"></script>
+
+    <!-- Circulo -->
+    <script src="../js/circle/generateCircles.js"></script>
+    <script src="../js/circle/requestCircles.js"></script>
+
+    <!-- Usuário -->
+    <script src="../js/user/request.js"></script>
+    <script src="../js/user/cadastrarUsuario.js"></script>
+    <script src="../js/user/loginUsuario.js"></script>
+    <script src="../js/user/verifyLogin.js"></script>
+    <script src="../js/user/sair.js"></script>
 </body>
 </html>
