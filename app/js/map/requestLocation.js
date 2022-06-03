@@ -1,5 +1,5 @@
 var map;
-
+var latLong = []
 function success(pos){
     alterLocation(pos.coords.latitude, pos.coords.longitude)
     console.log(pos.coords.latitude, pos.coords.longitude)
@@ -14,11 +14,11 @@ function success(pos){
         .openPopup();
 
     map.on('click', function(ev) {
-        console.log(ev)
         let popup = L.popup()
             .setLatLng(ev.latlng)
             .setContent('<p>latitude'+ev.latlng.lat+' <br> longitude:'+ev.latlng.lng+'</p>')
             .openOn(map);
+        latLong = [ev.latlng.lat, ev.latlng.lng]
     });
     
 

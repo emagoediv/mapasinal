@@ -49,12 +49,45 @@
         margin: 0.5rem;
         border-radius: 0.5rem;
     }
+
+
+
+
+    .legendaMap {
+      float: left;
+      display: flex;
+      height: 100%;
+    }
+
+    .legendas {
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+      position: absolute;
+      color:black;
+      list-style-type: none;
+      border-radius: 1rem;
+      align-self: center;
+    }
+
+    .legendas li {
+      margin-top: 1rem;
+    }
+
+    .dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    }
+
+    
 </style>
 <body class="w-screen h-screen">
     <div class="buttonsModal">
         <ul class="nav">
             <li id="btnModalLogin"  class="itemModel"><button type="button" class="btn btn-primary" data-bs-target="#modalLogin"  data-bs-toggle="modal">Logar</button></li>
-            <li id="btnModalCircle" style="display: none;" class="itemModel"><button type="button" class="btn btn-primary"  data-bs-target="#modalCadCircle" data-bs-toggle="modal">Cadastrar Área</button></li>
+            <li id="btnModalCircle" style="display: none;" class="itemModel"><button type="button" class="btn btn-primary"  data-bs-target="#modalCadCircle" id="btnCadModelArea" data-bs-toggle="modal">Cadastrar Área</button></li>
             <li style="display: none;" id="btnSair" class="itemModel"><button type="button" id="btnSairClick" class="btn btn-danger">sair</button></li>
             <li class="itemModel">
                 <select id="operadora" name="operadora" class="form-select form-select-sm">
@@ -65,6 +98,16 @@
                     <option value="oi">Oi</option>
                 </select>
             </li>
+        </ul>
+    </div>
+
+
+    <div class="legendaMap">
+        <ul class="legendas">
+          <li><span class="dot" style="background-color: #00ff00;"></span><span style="margin: 0.5rem">Muito bom</span></li>
+          <li><span class="dot" style="background-color: #0000ff;"></span><span style="margin: 0.5rem">Ok</span></li>
+          <li><span class="dot" style="background-color: #ffff00;"></span><span style="margin: 0.5rem">Instável</span></li>
+          <li><span class="dot" style="background-color: #ff0000;"></span><span style="margin: 0.5rem">Sem sinal</span></li>
         </ul>
     </div>
     <div id="mapid" class="w-screen h-screen z-0"></div>
@@ -137,24 +180,32 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalToggleLabel">Cadastrar Área/h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="exampleModalToggleLabel">Cadastrar Área</h5>
+              <button type="button" id="closeModalCircle" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form id="formLogin">
+              <form id="formCadCircle">
                 <div class="mb-3">
-                  <label for="nameUser" class="form-label">Latitude</label>
-                  <input type="text" class="form-control" placeholder="-47.1246532" id="nameUser" >
+                  <select id="operadora" name="operadora" class="form-select form-select-sm">
+                      <option selected value="">selectione uma operadora</option>
+                      <option value="vivo">vivo</option>
+                      <option value="claro">CLARO</option>
+                      <option value="tim">TIM</option>
+                      <option value="oi">Oi</option>
+                  </select>
                 </div>
                 <div class="mb-3">
-                  <label for="nameUser" class="form-label">Longitude</label>
-                  <input type="text" class="form-control" placeholder="-47.1246532" id="nameUser" >
+                  <label for="raio" class="form-label">raio em km</label>
+                  <input type="number" step="0.1" min="0" max="10" name="raio" class="form-control" placeholder="1.2" id="raio">
                 </div>
                 <div class="mb-3">
-                  <label for="password" class="form-label">raio em km</label>
-                  <input type="text" class="form-control" placeholder="1" id="password">
-                </div>
-                <div class="mb-3 form-check">
+                  <select id="cor" name="cor" class="form-select form-select-sm">
+                      <option selected value="">selectione um nível de sinal</option>
+                      <option value="green">Muito bom</option>
+                      <option value="blue">Ok</option>
+                      <option value="yellow">Instável</option>
+                      <option value="red">Sem sinal</option>
+                  </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar Área</button>
               </form>
@@ -169,7 +220,8 @@
 
       <!-- Configurações -->
     <script src="../js/configs/webserver.js"></script>
-    <script src="../js/configs/cookieLogin.js"></script>
+    <script src="../js/configs/cookieLogin.js"></script> 
+    <script src="../js/configs/colors.js"></script> 
 
     <!-- Mapa -->
     <script src="../js/map/setMap.js"></script>
@@ -178,6 +230,8 @@
     <!-- Circulo -->
     <script src="../js/circle/generateCircles.js"></script>
     <script src="../js/circle/requestCircles.js"></script>
+    <script src="../js/circle/selectArea.js"></script>
+    <script src="../js/circle/cadastrarCircle.js"></script>
 
     <!-- Usuário -->
     <script src="../js/user/request.js"></script>
