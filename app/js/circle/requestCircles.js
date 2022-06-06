@@ -8,18 +8,16 @@ function requestCircles(operadora) {
         body: dados
     }).then(response => response.json()).then(
         (returneds) => {
-            if(!returneds.status) {
-                for (let i in returneds) {
-                    console.log(returneds[i].latitude, returneds[i].longitude, returneds[i].raio, returneds[i].color, returneds[i].cor)
-                    generateCircle(returneds[i].latitude, returneds[i].longitude, returneds[i].raio, returneds[i].color, returneds[i].cor)
+            if(returneds.status) {
+                    returneds.circles.forEach(circle => {
+                        generateCircle(circle.latitude, circle.longitude, circle.raio, circle.color, circle.cor)
+                    })
                 }
-            }
+            })
     }
-)}
 
 let select = document.querySelector('#operadora')
 select.addEventListener('change', () => {
     generateMap()
     requestCircles(select.value)
-
 })

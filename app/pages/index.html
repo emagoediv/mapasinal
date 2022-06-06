@@ -126,11 +126,11 @@
                 <form id="formLogin">
                     <div class="mb-3">
                       <label for="nameUser" class="form-label">nome de usuário</label>
-                      <input type="text" class="form-control" name="name" id="nameUser" >
+                      <input type="text" required class="form-control" name="name" id="nameUser" >
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Senha</label>
-                      <input type="password" class="form-control" name="password" id="password">
+                      <input type="password" required class="form-control" name="password" id="password">
                     </div>
                     <div class="mb-3 form-check">
                     </div>
@@ -186,7 +186,7 @@
             <div class="modal-body">
               <form id="formCadCircle">
                 <div class="mb-3">
-                  <select id="operadora" name="operadora" class="form-select form-select-sm">
+                  <select id="operadora" required name="operadora" class="form-select form-select-sm">
                       <option selected value="">selectione uma operadora</option>
                       <option value="vivo">vivo</option>
                       <option value="claro">CLARO</option>
@@ -196,10 +196,10 @@
                 </div>
                 <div class="mb-3">
                   <label for="raio" class="form-label">raio em km</label>
-                  <input type="number" step="0.1" min="0" max="10" name="raio" class="form-control" placeholder="1.2" id="raio">
+                  <input type="number" required step="0.01" min="0" max="10" name="raio" class="form-control" placeholder="1.2" id="raio">
                 </div>
                 <div class="mb-3">
-                  <select id="cor" name="cor" class="form-select form-select-sm">
+                  <select id="cor" required name="cor" class="form-select form-select-sm">
                       <option selected value="">selectione um nível de sinal</option>
                       <option value="green">Muito bom</option>
                       <option value="blue">Ok</option>
@@ -208,6 +208,78 @@
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar Área</button>
+                <button type="button" class="btn btn-warning" data-bs-target="#modalList" id="openModalList" data-bs-toggle="modal" >Áreas cadastradas</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Modal de listar áreas -->
+    <div class="modal fade" id="modalList" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">Áreas cadastradas por mim:</h5>
+              <button type="button" id="closeModalList" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                  <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Operadora</th>
+                            <th scope="col">editar</th>
+                            <th scope="col">excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listCirclesArea">
+                        
+                        </tbody>
+                  </table>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       <!-- Modal de editar área -->
+    <div class="modal fade" id="modalEditCircle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">Editar Área</h5>
+              <button type="button" id="closeModalCircleEdit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="formEditCircle">
+                <div class="mb-3">
+                  <select required id="operadoraEdit" name="operadora" class="form-select form-select-sm">
+                      <option selected value="">selectione uma operadora</option>
+                      <option value="vivo">vivo</option>
+                      <option value="claro">CLARO</option>
+                      <option value="tim">TIM</option>
+                      <option value="oi">Oi</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="raio" class="form-label">raio em km</label>
+                  <input required type="text" step="0.01" min="0" max="10" name="raio" class="form-control" placeholder="1.2" id="raioEdit">
+                </div>
+                <div class="mb-3">
+                  <select id="corEdit" required name="cor" class="form-select form-select-sm">
+                      <option selected value="">selectione um nível de sinal</option>
+                      <option value="green">Muito bom</option>
+                      <option value="blue">Ok</option>
+                      <option value="yellow">Instável</option>
+                      <option value="red">Sem sinal</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Área</button>
+                <button type="button" style="display: none;" id="btnOpenModalEdit" class="btn btn-warning" data-bs-target="#modalEditCircle" data-bs-toggle="modal" >Cadastrar</button>
               </form>
             </div>
           </div>
@@ -232,6 +304,7 @@
     <script src="../js/circle/requestCircles.js"></script>
     <script src="../js/circle/selectArea.js"></script>
     <script src="../js/circle/cadastrarCircle.js"></script>
+    <script src="../js/circle/alertCad.js"></script>
 
     <!-- Usuário -->
     <script src="../js/user/request.js"></script>
@@ -239,5 +312,13 @@
     <script src="../js/user/loginUsuario.js"></script>
     <script src="../js/user/verifyLogin.js"></script>
     <script src="../js/user/sair.js"></script>
+
+    <!-- Interação do usuario com os circulos cadastrados -->
+    <script src="../js/userCircle/requestUserCircle.js"></script>
+    <script src="../js/userCircle/listCircle.js"></script>
+    <script src="../js/userCircle/irArea.js"></script>
+    <script src="../js/userCircle/deleteCircle.js"></script>
+    <script src="../js/userCircle/editCircle.js"></script>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-$action = ["cadastrarUser", "loginUser", "excluirUser", "editarCircle", "editarUser", "cadastrarCircle", "lerCircle"];
+$action = ["cadastrarUser", "loginUser", "editarCircle", "listCircle", "cadastrarCircle", "lerCircle", "deleteCircle", "editCircle", "saveCircle"];
 
 if(isset($_POST["request"])) {
     if(isset($_POST["action"]) && in_array($_POST["action"], $action)) {
