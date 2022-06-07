@@ -2,7 +2,7 @@ function requestCirclesList() {
     dados = new FormData
     dados.append('request', true)
     dados.append('action', 'listCircle')
-    dados.append("idUser", cookie.get("userId"))
+    dados.append("idUser", cookie.get("idUser"))
     fetch(WEBSERVER, {
         method: 'POST',
         body: dados

@@ -20,7 +20,7 @@ formCircleCad.addEventListener("submit", e => {
         dados.append("request", true)
         dados.append("action", "cadastrarCircle")
         dados.append("request", true)
-        dados.append("idUser", cookie.get("userId"))
+        dados.append("idUser", cookie.get("idUser"))
         dados.append("latitude", coords[0])
         dados.append("longitude", coords[1])
         getColor(cor.value)
@@ -28,7 +28,7 @@ formCircleCad.addEventListener("submit", e => {
         requestCadCircle(dados, returnCadCircle)
     } else {
         alert("selectione um ponto central no mapa antes de cadastrar uma nova área")
-        
+
     }
     
 })
