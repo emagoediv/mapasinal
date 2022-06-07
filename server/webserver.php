@@ -1,15 +1,11 @@
 <?php
 
-$action = ["cadastrarUser", "loginUser", "editarCircle", "listCircle", "cadastrarCircle", "lerCircle", "deleteCircle", "editCircle", "saveCircle"];
-error_reporting(E_ALL);
-if(isset($_POST["request"])) {
-    if(isset($_POST["action"]) && in_array($_POST["action"], $action)) {
-        require __DIR__ . "/config/Conn.php";
-        require __DIR__ . "/lib/" . $_POST["action"] . ".php";
-       
-    }
+require_once __DIR__ . "/vendor/autoload.php";
+use Mapasinal\Controller\MapasinalController;
+
+if (isset($_POST["request"])) {
+    $mapasinal = new MapasinalController($_POST["action"], $_POST);
     
 } else {
-     echo json_encode(["teste"=> true]);
-        exit;
+    Header("Location: ../app/pages/");
 }

@@ -1,0 +1,10 @@
+{
+    "name": "emagoediv/mapasinal",
+    "description": "backend",
+    "autoload": {
+        "psr-4": {
+            "Mapasinal\\": "mapasinal/"
+        }
+    },
+    "require": {}
+}
