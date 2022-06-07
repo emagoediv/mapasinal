@@ -1,1 +1,1 @@
-const WEBSERVER =  "http://localhost/mapasinal2/server/webserver.php"
+const WEBSERVER =  "http://localhost:8181/mapasinal/server/webserver.php"
