@@ -10,6 +10,7 @@ function deleteCircle(id) {
     }).then(response => response.json()).then(
         (returneds) => {
             if(returneds.status) {
+                generateMap()
                 requestCircles(select.value)
                 alert("excluido com sucesso")
                 btnOpenModalList.click()
